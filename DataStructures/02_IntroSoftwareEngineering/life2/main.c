@@ -31,10 +31,10 @@ int main(void)
         write_map(map);
         list_clear(&maylive);
         list_clear(&maydie);
-        list_traverse(*newlive, add_neighbors);
+        list_traverse(&newlive, add_neighbors);
 
         // changes n_neighbors, maylive, maydie
-        list_traverse(&new_die, subtract_neighbors); 
+        list_traverse(&newdie, subtract_neighbors); 
         list_clear(&newlive);
         list_clear(&newdie);
 

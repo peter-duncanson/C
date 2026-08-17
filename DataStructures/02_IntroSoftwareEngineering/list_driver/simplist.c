@@ -5,8 +5,8 @@
 void list_add(ListEntry x, List *list)
 {
     if (list_full(list))
-        // Warning("Attempt to insert into a full list.");
-        exit(1);
+        Warning("Attempt to insert into a full list.");
+        // exit(1);
     else
         list->entry[list->count++] = x;
 }

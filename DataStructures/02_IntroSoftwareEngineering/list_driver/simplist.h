@@ -17,3 +17,4 @@ void list_add(ListEntry, List *);
 void list_traverse(List *, void(*)(ListEntry));
 void list_copy(List *, const List *);
 void copy_list(List *destination, const List *source);
+
