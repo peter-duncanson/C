@@ -2,17 +2,17 @@
 #include <ctype.h>
 #include "simplist.h"
 
-void print(ListEntry);
+void print(ListEntry x);
 void introduction(void);
 void help(void);
 char get_command(void);
-void do_command(char, List *);
+void do_command(char, List *list);
 
 int main(void)
 {
     List list;
 
-    introduction();
+    // introduction();
     
     list_create(&list);
 
@@ -86,7 +86,8 @@ void do_command(char command, List *list)
     {
         case 'i':
             if (list_full(list))
-                Warning("Sorry, list is full!");
+                // Warning("Sorry, list is full!");
+                exit(1);
             else
             {
                 printf("Enter new key(s) to insert:");
@@ -94,7 +95,7 @@ void do_command(char command, List *list)
                     list_add(x, list);
                 if (x != '\n')
                 {
-                    Warning("The list is full, cannot insert any more entries.");
+                    // Warning("The list is full, cannot insert any more entries.");
                     while ((x = getchar()) != '\n');
                 }
             }
