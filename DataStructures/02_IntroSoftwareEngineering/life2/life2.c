@@ -14,28 +14,126 @@ bool user_says_yes(void)
     while (true)
     {
         while ((user_input = getchar()) == '\n');
-        if (user_input == 'y' || 'Y') return true;
-        else if (user_input == 'n' || 'N') return false;
+        if (user_input == 'y' || user_input == 'Y') return true;
+        else if (user_input == 'n' || user_input == 'N') return false;
         else printf("Incorrect input, please try again.\n");
     }
 }
 
-
-void write_map(Grid grid)
+/* write_map:   Writes all changes for next generation to array map.
+ * Pre:         The lists maylive and maydie have been traversed and all appropriate cells have
+ *              been vivified or killed respectively.
+ * Post:        The array map is updated and ready to display.
+ * Uses:        Array map.
+ */
+void write_map(Grid map)
 {
 
 }
 
+/* ================================================================================================
+ * find_size:   Asks the user to enter a size for the simulation grid.
+ * Pre:         None.
+ * Post:        The size for the simulation grid is defined in global variables.
+ * Uses:        Global variables rows and cols.
+ */
 void find_size(int *rows, int *cols)
 {
+    while (true)
+    {
+        printf("Enter your desired grid size for the simulation (rows, columns): ");
+        scanf("%d %d", &rows, &cols);
 
+        if (rows > MAXROW)
+        {
+            printf("Row size too large, max size is %d rows.\n", MAXROW);
+            continue;
+        }
+        else if (rows <= 0)
+        {
+            printf("You must have a positive integer number of rows!\n");
+            continue;
+        }
+        else if (cols > MAXCOL)
+        {
+            printf("Column size too large, max size is %d columns.\n", MAXCOL);
+            continue;
+        }
+        else if (cols <= 0)
+        {
+            printf("You must have a positive integer number of columns!\n");
+            continue;
+        }
+        else break;
+    }
 }
 
-void read_map(List *list, Grid grid)
+/* ================================================================================================
+ * read_map:    Reads in an initial configuration, and updates list newlive and grid map with the
+ *              fresh alive cells. Used in initialize function.
+ * Pre:         None.
+ * Post:        List newlive and array map contain the cells that were vivified by default as
+ *              being part of the initial configuration.
+ * Uses:        List newlive and array map, global row and col variables.
+ */
+void read_map(List *newlive, Grid map)
 {
+    int i, j, c;
+
+    printf("Enter your initial configuration row by row, with alive cells denoted by a 'x' and\n"
+           "dead cells denoted by a ' '.\n");
+
+    while (true)
+    {
+        for (i = 0; i < rows; i++)
+        {
+            for (j = 0; j < rows; j++)
+            {
+                map[i][j] = DEAD;
+            }
+        }
+
+        for (i = 1; i <= rows; i++)
+        {
+            j = 1;
+            while (j <= cols)
+            {
+                c = getchar();
+                if (c == 'x') map[i][j] = ALIVE;
+                else if (c != ' ') continue;
+                j++;
+            }
+        }
+        while (getchar() != '\n');
+
+        for (i = 0; i < rows; i++)
+        {
+            for (j = 0; j < rows; j++)
+            {
+                printf("%c ", map[i][j]);
+            }
+            puts("");
+        }
+
+        printf("Are you happy with this configuration? (y/n)");
+
+        while ((c = getchar()) != '\n');
+
+        if (c == 'y')
+        
+                
+    }
 
 }
 
+/* ================================================================================================
+ * kill:    kill cell if applicable
+ * Pre:     The cell is a candidate to die
+ * Post:    Checks that the cell meets all requirements to die. If not, no change is made. If so,
+ *          the cell is added to the list newdie, and the array map is updated.
+ * Uses:    Function list_add, array n_neighbors, changes array map nad list newdie as global
+ *          variables.
+ */
 void kill(ListEntry cell)
 {
 
@@ -45,7 +143,7 @@ void kill(ListEntry cell)
  * vivify:  Vivify cell if applicable.
  * Pre:     The cell is a candidate to become alive.
  * Post:    Checks that the cell meet all requirements to become alive. If not, no change is made.
- *          If so, then cell is added to the list newlive, and the array map is updated.
+ *          If so, the cell is added to the list newlive, and the array map is updated.
  * Uses:    Function list_add, array n_neighbors, changes array map and list newlive as global
  *          variables.
  */

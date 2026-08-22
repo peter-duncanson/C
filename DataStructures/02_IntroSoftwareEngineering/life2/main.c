@@ -18,8 +18,6 @@ int main(void)
 
     write_map(map);
 
-    printf("Something may go here");
-
     while (user_says_yes())
     {
         // uses n_neighbors, changes map and newlive
