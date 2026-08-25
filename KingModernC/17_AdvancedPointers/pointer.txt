@@ -1,0 +1,23 @@
+Section "InputClass"
+    Identifier "ELAN Touchpad"
+    MatchProduct "ELAN0763:00 04F3:31EC Touchpad"
+    Driver "synaptics"
+
+    # Natural scrolling
+    Option "VertScrollDelta" "-88"
+    Option "HorizScrollDelta" "-88"
+
+    # Two-finger scrolling: vertical + horizontal
+    Option "VertTwoFingerScroll" "true"
+    Option "HorizTwoFingerScroll" "true"
+
+    # Tapping
+    Option "TapButton1" "1"
+    Option "TapButton2" "3"
+    Option "TapButton3" "0"
+
+    # Palm detection
+    Option "PalmDetect" "true"
+    Option "PalmMinWidth" "8"
+    Option "PalmMinZ" "200"
+EndSection

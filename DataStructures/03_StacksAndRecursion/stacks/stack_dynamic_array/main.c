@@ -90,7 +90,7 @@ bool push(Stack *stack, int item)
     if (is_full(stack)) return false;
 
     stack->collection[stack->size++] = item;
-
+    
     // stack->size++;
 
     return true;

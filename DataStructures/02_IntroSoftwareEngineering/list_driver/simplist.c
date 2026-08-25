@@ -14,9 +14,7 @@ void list_add(ListEntry x, List *list)
 // traverses the list, and performs operation defined in function Visit to each entry
 void list_traverse(List *list, void (*Visit)(ListEntry))
 {
-    int i;
-    for (i = 0; i < list->count; i++)
-        (*Visit)(list->entry[i]);
+    for (int i = 0; i < list->count; i++) (*Visit)(list->entry[i]);
 }
 
 // creates an empty list, with a count of 0
