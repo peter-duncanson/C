@@ -1,0 +1,188 @@
+#include "cont_stack.h"
+
+Stack *stack_create(size_t capacity, size_t size)
+{
+    Stack *s = malloc(sizeof(Stack));
+    if (s == NULL)
+    {
+        puts("malloc returned null pointer in function stack_create. Aborting.");
+        exit(1);
+    }
+
+    s->size = size;
+    s->capacity = capacity;
+    s->top = 0;
+
+    // TODO: check for overflow
+    s->data = malloc(s->capacity * s->size);
+    if (s->data == NULL)
+    {
+        free(s);
+        puts("malloc returned null pointer in function stack_create. Aborting.");
+        exit(1);
+    }
+
+    return s;
+}
+
+void stack_destroy(Stack *s)
+{
+    free(s->data);
+    free(s);
+}
+
+bool stack_full(Stack *s)
+{
+    return (s->top == s->capacity);
+}
+
+bool stack_empty(Stack *s)
+{
+    return (s->top == 0);
+}
+
+void pop(Stack *s, void *item)
+{
+    if (stack_empty(s))
+    {
+        puts("Attempt to pop from an empty stack.");
+        return;
+    }
+
+    s->top--;
+    memcpy(item, (char *)s->data + s->top * s->size, s->size);
+}
+
+void push(Stack *s, void *item)
+{
+    if (stack_full(s))
+    {
+        puts("Attempt to push to a full stack.");
+        return;
+    }
+
+    memcpy((char *)s->data + s->top * s->size, item, s->size);
+    s->top++;
+}
+
+void peek(Stack *s, void *item)
+{
+    if (stack_empty(s))
+    {
+        puts("Attempt to peek at an empty stack.");
+        return;
+    }
+
+    memcpy(item, (char *)s->data + (s->top - 1) * s->size, s->size);
+}
+
+void stack_print(Stack *s)
+{
+    for (int i = s->top - 1; i >= 0; i--)
+    {
+        unsigned long *p = &s->data[i];
+        printf("%ld\n", *p);
+    }
+}
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <stddef.h>
+#include <stdbool.h>
+#include <string.h>
+
+#define MAXSTACK 1000
+
+typedef struct
+{
+    void *data;         // heap allocated array to store stack contiguously
+    size_t size;        // size in bytes of each data element 
+    size_t capacity;    // store a stack capacity
+    size_t top;         // store the index of the current top of the stack
+} Stack;
+
+Stack *stack_create(size_t capacity, size_t size);
+void stack_destroy(Stack *s);
+bool stack_full(Stack *s);
+bool stack_empty(Stack *s);
+void pop(Stack *s, void *item);
+void push(Stack *s, void *item);
+void peek(Stack *s, void *item);
+void stack_print(Stack *s);
+
+
+    puts("Welcome to the Stack!");
+    size_t stack_capacity = 0;
+    size_t element_size = 0;
+    size_t pop_value = 0;
+    int user_input;
+    Stack *s = NULL;
+
+    while (true)
+    {
+        printf("Enter a capacity for your stack.\n> ");
+        scanf("%d", &stack_capacity);
+        if (stack_capacity > MAXSTACK)
+            printf("Enter a number less than %d.\n", MAXSTACK);
+        else break;
+    }
+
+    while (true)
+    {
+        printf("Enter a size in bytes for the elements.\n> ");
+        scanf("%lu", &element_size);
+
+        switch (element_size)
+        {
+            case 1:
+                s = stack_create(stack_capacity, element_size);
+                printf("Stack succesfully created to store %lu char.\n", stack_capacity);
+                break;
+            case 2:
+            case 4:
+                s = stack_create(stack_capacity, element_size);
+                printf("Stack succesfully created to store %lu int.\n", stack_capacity);
+                break;
+            default:
+                puts("Invalid size entered. Please try again.");
+                break;
+        }
+        if (s != NULL) break;
+    }
+
+    for (;;)
+    {
+        puts("[a] push\t[b] pop\t[c] peek\t[p] print [v] view popped [q] quit");
+        while ((user_input = getchar()) != '\n')
+        {
+            switch (user_input)
+            {
+                case 'a': // push
+                    size_t push_value;
+                    printf("Value to push:\n> ");
+                    scanf("%lu", &push_value);
+                    push(s, &push_value);
+                    break;
+
+                case 'b': // pop
+                    pop(s, &pop_value);
+                    break;
+                case 'c': // peek
+                    peek(s, &pop_value);
+                    break;
+                case 'p': // print
+                    stack_print(s);
+                    break;
+                case 'v': // view popped
+                    printf("Popped value: %lu\n", pop_value);
+                    break;
+                case 'q': // quit
+                    stack_destroy(s);
+                    puts("Stack succesfully destroyed, exiting.");
+                    exit(0);
+            }
+        }
+    }
+    // should not happen
+    return 1;
+}

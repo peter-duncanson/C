@@ -1,86 +1,56 @@
 #include "cont_stack.h"
 
-Stack *stack_create(size_t capacity, size_t size)
+void *stack_create(void *stack, int size)
 {
-    Stack *s = malloc(sizeof(Stack));
-    if (s == NULL)
+    stack = malloc(sizeof(*stack));
+    if (stack == NULL) exit(1);
+
+    stack->size = size;
+    stack->top = 0;
+
+    stack->data = malloc(sizeof(*(stack->data)));
+    if (stack->data == NULL)
     {
-        puts("malloc returned null pointer in function stack_create. Aborting.");
+        free(stack);
         exit(1);
     }
 
-    s->size = size;
-    s->capacity = capacity;
-    s->top = 0;
-
-    // TODO: check for overflow
-    s->data = malloc(s->capacity * s->size);
-    if (s->data == NULL)
-    {
-        free(s);
-        puts("malloc returned null pointer in function stack_create. Aborting.");
-        exit(1);
-    }
-
-    return s;
+    return stack;
 }
 
-void stack_destroy(Stack *s)
+void stack_destroy(void *stack)
 {
-    free(s->data);
-    free(s);
+    free(stack->data);
+    free(stack);
 }
 
-bool stack_full(Stack *s)
+bool stack_full(void *stack)
 {
-    return (s->top == s->capacity);
+    return stack->top == stack->size;
 }
 
-bool stack_empty(Stack *s)
+bool stack_empty(void *stack)
 {
-    return (s->top == 0);
+    return stack->top == 0;
 }
 
-void pop(Stack *s, void *item)
+void pop(void *stack, void *item)
 {
-    if (stack_empty(s))
-    {
-        puts("Attempt to pop from an empty stack.");
-        return;
-    }
-
-    s->top--;
-    memcpy(item, (char *)s->data + s->top * s->size, s->size);
+    *item = stack->data[stack->top--];
 }
 
-void push(Stack *s, void *item)
+void push(void *stack, void *item)
 {
-    if (stack_full(s))
-    {
-        puts("Attempt to push to a full stack.");
-        return;
-    }
-
-    memcpy((char *)s->data + s->top * s->size, item, s->size);
-    s->top++;
+    stack->data[++stack->top] = *item;
 }
 
-void peek(Stack *s, void *item)
+void peek(void *stack, void *item)
 {
-    if (stack_empty(s))
-    {
-        puts("Attempt to peek at an empty stack.");
-        return;
-    }
-
-    memcpy(item, (char *)s->data + (s->top - 1) * s->size, s->size);
+    *item = stack->data[stack->top];
 }
 
-void stack_print(Stack *s)
+void stack_print(void *stack)
 {
-    for (int i = s->top - 1; i >= 0; i--)
-    {
-        unsigned long *p = &s->data[i];
-        printf("%ld\n", *p);
-    }
+    for (int i = stack->top - 1; i >= 0; i--)
+        printf("%ld\n", stack->data[i]);
 }
