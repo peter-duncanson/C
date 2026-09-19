@@ -1,4 +1,4 @@
-SRC = PLACEHOLDER.c
+SRC = string_permutations.c
 TARGET = $(SRC:.c=)
 CC = gcc
 CFLAGS = -Wall -Wextra -g
@@ -15,4 +15,5 @@ clean:
 	rm -f $(TARGET)
 
 .PHONY: all run clean
+
 
