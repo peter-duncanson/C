@@ -3,17 +3,28 @@
 #include <string.h>
 #include <stddef.h>
 
+// char (*perm(int index, int len, const char *s))[len];
 void rp(int index, int len, const char *s);
 char *swap(const char *s, char *swapped, size_t a, size_t b);
+size_t factorial(size_t n);
 
 char sol[100];
 
 int main(void)
 {
-    rp(0, 3, "ABC");
+    const char *s = "ABC";
+    const size_t n_permute = factorial(strlen(s));
+
+
+    // rp(0, 3, "ABC");
 
     return 0;
 }
+
+// char (*perm(int index, int len, const char *s))[len]
+// {
+//     return;
+// }
 
 void rp(int index, int len, const char *s)
 {
@@ -59,4 +70,10 @@ char *swap(const char *s, char *swapped, size_t a, size_t b)
     swapped[b] = temp;
     
     return swapped;
+}
+
+size_t factorial(size_t n)
+{
+    if (n <= 1) return n;
+    else return n * factorial(n - 1);
 }

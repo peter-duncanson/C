@@ -1,4 +1,4 @@
-SRC = knight_tour.c
+SRC = string_permutations.c
 TARGET = $(SRC:.c=)
 CC = gcc
 CFLAGS = -Wall -Wextra -g
