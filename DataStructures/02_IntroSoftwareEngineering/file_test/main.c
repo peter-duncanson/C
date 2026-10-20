@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-
+// this is a comment
 #define DEBUG 0
 
 FILE *fptr = NULL;
@@ -18,7 +18,6 @@ int main(int argc, char **argv)
 
         fptr = fopen(argv[1], "r");
     }
-
     if (fptr == NULL)
     {
         printf("Unable to read file.\n");

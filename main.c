@@ -18,7 +18,6 @@ int main(void)
 
     // code that prints name
     printf("My name is %s\n", name);
-
     foo();
 
     name = name2;

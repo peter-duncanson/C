@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stddef.h>
 #include <string.h>
+#include "exercises.h"
 
-// exercise 1
 void *my_malloc(size_t size)
 {
     void *p = malloc(size);
