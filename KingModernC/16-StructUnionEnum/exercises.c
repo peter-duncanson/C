@@ -80,28 +80,167 @@
     if they are equal.
 */
 
-struct date { int month, day, year; };
-struct date d1 = { 8, 12, 1997, };
-struct date d2 = { 3, 27, 2001, };
+// struct date { int month, day, year; };
+// struct date d1 = { 8, 12, 1997, };
+// struct date d2 = { 3, 27, 2001, };
+//
+// int day_of_year(struct date d)
+// {
+//     int day = d.day;
+//     // I dont feel like doing all the different month amounts
+//     return day;
+// }
+//
+// int compare_dates(struct date d1, struct date d2)
+// {
+//     if ()
+//
+// }
+//
+//
+// int main(void)
+// {
+//
+//     return 0;
+// }
+//
 
-int day_of_year(struct date d)
-{
-    int day = d.day;
-    // I dont feel like doing all the different month amounts
-    return day;
-}
-
-int compare_dates(struct date d1, struct date d2)
-{
-    if ()
-
-}
-
-
-int main(void)
-{
-    
-    return 0;
-}
-
-
+// 6.   Write the following function, assuming that the time structure
+//      contains three members; hours, minutes, and seconds all of type
+//      int.
+//
+//      struct time split_time(long total_seconds);
+//
+//      the function accepts an amount of seconds and returns a struct with
+//      the seconds converted.
+//
+// 7.   Assume that the fraction structure contains two members: numberator
+//      and denominator. Write functions that perform the following operations
+//      on the struct fractions.
+//      (a) reduce the fraction f to lowest terms
+//      (b) add the fractions f1 and f2
+//      (c) subtract the fraction f2 from the fraction f1
+//      (d) multiply the fractions f1 and f2
+//      (e) divide the fraction f1 by the fraction f2
+//
+// 8.   Let color be the following structure:
+//      struct color {
+//          int red;
+//          int green;
+//          int blue;
+//      };
+//
+//      (a) write a declaration for a const variable named MAGENTA of type
+//          struct color whose members have the values 255, 0, 255
+//      (b) repeat part a but use a designated initializer, not specifying the
+//          value of green to allow it to default to zero
+//
+// 9.   Write the following functions for the color structure defined in
+//      exercise 8.
+//      (a) struct color make_color(int red, int green, int blue);
+//      (b) int get_red(struct color c);
+//      (c) bool equal_color(struct color c);
+//      (d) struct color brighter(struct color c);
+//          -> divide all members by 0.7
+//      (e) struct color darker(struct color c);
+//          -> multiply all member by 0.7
+//  
+// 10.  The following structures are designed to store information about objects
+//      on a graphics screen:
+//      struct point { int x, y; };
+//      struct rectangle { struct point upper_left, lower_right; };
+//      A point structure stores the x and y coordinates of a point on the
+//      screen. A rectangle structure stores the coordinates of the upper left
+//      and lower right corners of a rectangle. Write functions that perform
+//      the following operations on a rectangle structure r passed as argument
+//      (a) compute the area of r
+//      (b) compute the center of r, returning it as a point structure.
+//      (c) more r by x units in the x direction and y units in the y direction,
+//          return a modified version of r.
+//      (d) determine if a point p lies within r.
+//
+// 11.  Suppose the s is the following structure:
+//      struct {
+//          double a;
+//          union {
+//              char b[4];
+//              double c;
+//              int d;
+//          } e;
+//          char f[4];
+//      } s;
+//
+//      if char values occupy one byte, int values four bytes and double eight
+//      bytes, how much space will the compiler allocate for s?
+//
+// 12.  Suppose that u is the following union:
+//      union {
+//          double a;
+//          struct {
+//              char b[4];
+//              double c;
+//              int d;
+//          } e;
+//          char f[4];
+//      } u;
+//
+//      how much space will the compiler allocate for u?
+//
+// 13.  suppose that s is the following structure (point is the structure
+//      declared in exercise 10)
+//
+//      struct shape {
+//          int shape_kind; // rectangle or circle
+//          struct point center;    // coordinates of center
+//          union {
+//              struct {
+//                  int height, width;
+//              } rectangle;
+//              struct {
+//                  int radius;
+//              } circle;
+//          } u;
+//      } s;
+//
+//      indicate which of the following statements are legal and correct the
+//      ones that aren't
+//      (a) s.shape_kind = RECTANGLE;
+//      (b) s.center.x = 10;
+//      (c) s.height = 25;
+//      (d) s.u.rectangle.width = 8;
+//      (e) s.u.circle = 5;
+//      (f) s.u.radius = 5;
+//
+// 14.  Let shape be the structure tag declared in exercise 13. Write functions
+//      that perform the following operations on a shape structure s pass as arg
+//      (a) compute the area of s
+//      (b) move s by x units in the x direction and y units in the y direction
+//          returning a modified version of s
+//      (c) scale s by a factor of double c. return a modified version of s
+//
+// 15.  (a) declare a tag for an enumeration whose values represent the seven
+//          days of the week.
+//      (b) use typedef to degine a name for the enum in part a
+// 
+// 16.  which of the following statements about enumeration constants are true?
+//      (a) an enumeration constant may represent any integer specified by the
+//          programmer.
+//      (b) enumeration constants have exactly the same properties as constants
+//          created using #define.
+//      (c) enumeration constants have the values 0, 1, 2... by default.
+//      (d) all constants in an enumeration must have different values
+//      (e) enumeration constants may be used as integers in expressions
+//
+// 17.  suppose that b and i are declared as follows:
+//      enum { FALSE, TRUE } b;
+//      int i;
+//
+//      which of the following statelemts are legal? which ones are 'safe'?
+//      (always yields a meaningful result)
+//      (a) b = FALSE;
+//      (b) b = i;
+//      (c) b++;
+//      (d) i = b;
+//      (e) i = 2 * b + 1;
+//
+// 18.  (a) Each square of a chessboard can hold one piece, a pawn

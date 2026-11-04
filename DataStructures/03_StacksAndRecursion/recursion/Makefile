@@ -1,4 +1,4 @@
-SRC = string_permutations.c
+SRC = towers_of_hanoi.c
 TARGET = $(SRC:.c=)
 CC = gcc
 CFLAGS = -Wall -Wextra -g
