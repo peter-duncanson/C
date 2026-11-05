@@ -1,4 +1,4 @@
-TARGET = exercises
+TARGET = exercises.elf
 SRC = main.c exercises.c
 BUILD_DIR = build
 OBJ = $(addprefix $(BUILD_DIR)/, $(SRC:.c=.o))

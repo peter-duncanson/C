@@ -146,11 +146,11 @@ struct fraction reduce(struct fraction a)
 //      (e) divide the fraction f1 by the fraction f2
 //
 // 8.   Let color be the following structure:
-//      struct color {
-//          int red;
-//          int green;
-//          int blue;
-//      };
+ // struct color {
+ //     int red;
+ //     int green;
+ //     int blue;
+ // };
 //
 //      (a) write a declaration for a const variable named MAGENTA of type
 //          struct color whose members have the values 255, 0, 255
