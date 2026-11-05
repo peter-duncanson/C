@@ -113,6 +113,18 @@
 //
 //      the function accepts an amount of seconds and returns a struct with
 //      the seconds converted.
+struct time split_time(long total_seconds)
+{
+    struct time {
+        int hours;
+        int minutes;
+        int seconds;
+    } t;
+    t.hours = total_seconds % 3600;
+    t.minutes = (total_seconds - t.hours * 3600) % 60;
+    t.seconds = (total_seconds - ((t.hours * 3600) + (t.minutes * 60)));
+    return t;
+}
 //
 // 7.   Assume that the fraction structure contains two members: numberator
 //      and denominator. Write functions that perform the following operations
